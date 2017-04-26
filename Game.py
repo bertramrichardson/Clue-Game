@@ -178,15 +178,24 @@ class Player (object):
         print("1 = Navigate the Game Board:")
         print("2 = Make a Suggestion:")
         print("3 = Make an Accusation:")
-        print("4 = Look at all of the avaliable cards:")
-        print("5 = Skip:")
+        print("4 = Skip:")
+        print("5 = Look at all of the available cards:")
         turn = int(input('What would you like to do?'))
         valid = False
         for x in rooms:
             if self.location == x:
                 valid = True
-        while turn < 1 or turn > 5 or (turn == 2 and valid == False):
+        while turn < 1 or turn > 5 or ((turn == 2 or turn == 3) and valid == False):
             turn = int(input ("You have entered an invalid option please try again (6 is the max, 2 is the minimum): "))
+        while turn == 5:
+            self.Help(kcards)
+            self.lose = False
+            turn = int(input('What else would you like to do?'))
+            print("1 = Navigate the Game Board:")
+            print("2 = Make a Suggestion:")
+            print("3 = Make an Accusation:")
+            print("4 = Skip:")
+            print("5 = Look at all of the available cards:")
         if turn == 1:
             self.Navigate(nav)
         if turn == 2 and valid == True:
@@ -195,9 +204,6 @@ class Player (object):
             count = self.Suggest(players, kcards, mcards, conf)
             self.Accuse(count, kcards)
         if turn == 4:
-            self.Help(kcards)
-            self.lose = False
-        if turn == 5:
             self.lose = False
     def Navigate(self,loc):
         x = 0
