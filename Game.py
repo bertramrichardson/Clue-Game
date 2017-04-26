@@ -1,4 +1,5 @@
 import random
+import turtle
 class GameStart(object):
     def __init__(self, count):
         self.count = count
@@ -25,6 +26,7 @@ class GameStart(object):
         Navi = []
         mCardList = []
         kCardList = []
+        wn = turtle.Screen()
         control = 0
         # initialize the players
         while control <= playing:
@@ -128,7 +130,7 @@ class GameStart(object):
                 x = x + 1
                 if x > playing:
                     x = 0
-            Players[x].Turn()
+            Players[x].Turn(Players, Navi, kCardList, mCardList, File)
             if Players[x].lose == True:
                 self.YouLose(Players[x])
                 losers = losers + 1
